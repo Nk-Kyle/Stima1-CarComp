@@ -13,8 +13,24 @@ public class Bot {
     private List<Command> directionList = new ArrayList<>();
 
     private final Random random;
+
+    //Parameter Penilaian
     private final int PowerUpScale = 2;
     private final int  CollisionScale = -2;
+
+    //Powerups
+    private int EmpScore = 2;
+    private int LizardScore = 2;
+    private int OilScore = 1;
+    private int TweetScore = 2;
+    private int BoostScore = 2;
+
+    //Bad Terrain
+    private int OilSpillPenalty = 1;
+    private int WallPenalty = 3;
+    private int MudPenalty = 1;
+
+
     private final int MINIMUM_SPEED = 0;
     private final int SPEED_STATE_1 = 3;
     private final int INITIAL_SPEED = 5;
@@ -23,6 +39,8 @@ public class Bot {
     private final int MAXIMUM_SPEED = 9;
     private final int BOOST_SPEED = 15;
     private final int FAR_DISTANCE = 40;
+
+
     private final static Command ACCELERATE = new AccelerateCommand();
     private final static Command LIZARD = new LizardCommand();
     private final static Command OIL = new OilCommand();
@@ -120,7 +138,6 @@ public class Bot {
         int left_score;
         int mid_score;
         int right_score;
-        int corrector = 1;
         if (speed < SPEED_STATE_2) return ACCELERATE;
         if (left_lane != 0){
             Lane[] llane_list = map.get(left_lane-1);
@@ -134,8 +151,8 @@ public class Bot {
         mid_data = evaluateLane(lane_list,block,startBlock,nextSpeed(speed));
 
         // Score to turn or not
-        if (safemode) { //Always find non-collision course (known mid always collission)
-            corrector = 0;
+        if (safemode) { //Always find non-collision course ( Prereq: known mid always collission)
+
             /** Both lane no collision **/
             if (right_data[2] == 1 && right_data[0] == 0 && left_data[2] == 1 && left_data[0] == 0) {
                 if (left_data[1] > right_data[1]) return TURN_LEFT;
@@ -201,16 +218,17 @@ public class Bot {
                 res[2] = 0;
                 break;
             }
-            else if (lane_list[i].terrain == Terrain.MUD || lane_list[i].terrain == Terrain.OIL_SPILL){
-                res[0] += 1;
-            }
-            else if (lane_list[i].terrain == Terrain.WALL){
-                res[0] += 3;
-            }
+            // TODO pertimbangin lawan di lane itu?
+            else if (lane_list[i].terrain == Terrain.MUD) res[0] += MudPenalty;
+            else if (lane_list[i].terrain == Terrain.WALL) res[0] += WallPenalty;
+            else if (lane_list[i].terrain == Terrain.OIL_SPILL) res[0] += OilSpillPenalty;
             else if (lane_list[i].terrain == Terrain.EMPTY || lane_list[i].terrain == Terrain.FINISH){}
-            else{
-                res[1] += 1;
-            }
+            else if (lane_list[i].terrain == Terrain.OIL_POWER) res[1] += OilScore;
+            else if (lane_list[i].terrain == Terrain.EMP) res[1] += EmpScore;
+            else if (lane_list[i].terrain == Terrain.BOOST) res[1] += BoostScore;
+            else if (lane_list[i].terrain == Terrain.LIZARD) res[1] += LizardScore;
+            else if (lane_list[i].terrain == Terrain.TWEET) res[1] += TweetScore;
+
         }
         return res;
     }
@@ -245,7 +263,7 @@ public class Bot {
         for (int i = max(block - startBlock, 0); i <= block - startBlock + speed; i++){
             if (i== lanelist.length) return false;
             if (lanelist[i].isOccupiedByCyberTruck || lanelist[i].terrain == Terrain.MUD || lanelist[i].terrain == Terrain.WALL
-            || lanelist[i].terrain == Terrain.OIL_SPILL) return true;
+                    || lanelist[i].terrain == Terrain.OIL_SPILL) return true;
         }
         return false;
     }
