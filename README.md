@@ -128,10 +128,10 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- CONTACT -->
 ## Contact
 <!-- sngaja diacak -->
-Ng Kyle		 - 13520040 [@mrfirdauss-20](https://github.com/mrfirdauss-20)
-Muhammad Risqi Firdaus	 - 13520043 [@christojeffrey](https://github.com/christojeffrey)
-Cristopher Jeffery	 - 13520055 [@Treoxer](https://github.com/Treoxer)
-\\
+Ng Kyle		 - 13520040 [@mrfirdauss-20](https://github.com/mrfirdauss-20)\
+Muhammad Risqi Firdaus	 - 13520043 [@christojeffrey](https://github.com/christojeffrey)\
+Cristopher Jeffrey	 - 13520055 [@Treoxer](https://github.com/Treoxer)\
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
