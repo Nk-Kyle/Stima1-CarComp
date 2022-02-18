@@ -57,6 +57,16 @@ Untuk mengetahui lebih lengkap tentang game ini, cek [di sini](https://github.co
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+### Greedy Algorithm
+Program memilih langkah-langkah yang menghasilkan jalan lajur tercepat dan terefektif untuk mencapai garis finish. Melalui lajur yang memiliki hambatan terkecil atau power up terbesar di antara jalur lainnya. Serta, langkah untuk mengeluarkan power up dan FIX seoptimal dan efektif mungkin, bergantung pada state dari permainan.
+Algoritma akan me-asses beban atau nilai dari tiap lajur yang akan dilalui, dengan pivot lajur tempat kendaraan berada saat itu. Dalam tiap asses yang dilakukan, hambatan akan dinilai sebagai beban, dan power up akan dinilai sebagai profit. Algoritma memilih langkah yang memiliki beban terkecil. Perlu diperhatikan, tiap jenis hambatan nilainya berbeda. Tergantung efek keterlambatan yang ditimbulkan akibat menabrak tiap hambatan. 
+Selain hambatan dan power up, hal yang perlu diperhatikan adalah kecepatan. Tiap belokan yang dilakukan akan mengurangi kecepatan, sedangkan jika tetap lurus, dan kecepatan belum maksimal, bot akan mengakselerasi mobil. <br> <br>
+Maka, alternatif algoritma greedy ini dalam beberapa tahap:
+1. Memeriksa apakah lurus merupakan jalur optimal (dalam 2 langkah). Jika ya, maka akan dikembalikan ACCELERATE.
+2. Memeriksa apakah belok merupakan jalur optimal (dalam 2 langkah). Jika ya, maka akan dikembalikan TURN.
+3. Jika 1 dan 2 tidak terpenuhi, maka pilih jalur dengan nilai kolisi terkecil.
+<br> 
+Ketiga tahap tersebut dilakukan 2 kali iterasi, yaitu dengan current reachable (jarak yang dapat dicapai saat ini), lalu diperiksa kembali dari current reachable.
 
 ### Built With
 
@@ -76,8 +86,9 @@ Berikut adalah sedikit instruksi mengenai penggunaan bot.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* Java
-* npm
+* [Java](https://www.oracle.com/java/technologies/downloads/#java8)
+* [IntelIiJ IDEA (to compile)](https://www.jetbrains.com/idea/)
+* [NodeJS](https://nodejs.org/en/download/)
 
 ### Installation
 
@@ -102,9 +113,9 @@ Bagi anda yang ingin melihat visualisasi lebih baik, anda dapat menggunakan visu
 ## Contact
 <!-- sngaja diacak -->
 
-Ng Kyle		 - 13520040 [@mrfirdauss-20](https://github.com/mrfirdauss-20)\
-Muhammad Risqi Firdaus	 - 13520043 [@christojeffrey](https://github.com/christojeffrey)\
-Cristopher Jeffrey	 - 13520055 [@Treoxer](https://github.com/Treoxer)
+Ng Kyle		 - 13520040 [@Nk-Kyle](https://github.com/Nk-Kyle)\
+Muhammad Risqi Firdaus	 - 13520043 [@mrfirdauss-20](https://github.com/mrfirdauss-20)\
+Cristopher Jeffrey	 - 13520055 [@christojeffrey](https://github.com/christojeffrey)
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
